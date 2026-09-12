@@ -1,0 +1,27 @@
+pub struct Framebuffer {
+    pub width: usize,
+    pub height: usize,
+    pub buffer: Vec<u32>,
+    current_color: u32,
+}
+
+impl Framebuffer {
+    pub fn new(width: usize, height: usize) -> Self {
+        Framebuffer {
+            width,
+            height,
+            buffer: vec![0; width * height],
+            current_color: 0xFFFFFF,
+        }
+    }
+
+    pub fn point(&mut self, x: usize, y: usize) {
+        if x < self.width && y < self.height {
+            self.buffer[y * self.width + x] = self.current_color;
+        }
+    }
+
+    pub fn set_current_color(&mut self, color: u32) {
+        self.current_color = color;
+    }
+}
